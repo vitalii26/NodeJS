@@ -31,10 +31,10 @@ export default {
         }
     },
     mounted() {
-        axios.get('http://localhost:8080/api/sites')
+        axios.get('http://localhost:3000/api/sites')
             .then((response) => {
+                console.log(response.data);
                 this.list = response.data;
-                console.log(JSON.stringify(response.data));
         });
     },
     components: {
