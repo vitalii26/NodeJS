@@ -15,6 +15,7 @@
 
 <script>
 import axios from 'axios';
+import { api } from '../helpers/helpers';
 import SitesCreate from '@/components/SitesCreate';
 import SitesList from '@/components/SitesList';
 export default {
@@ -30,12 +31,8 @@ export default {
 
         }
     },
-    mounted() {
-        axios.get('http://localhost:3000/api/sites')
-            .then((response) => {
-                console.log(response.data);
-                this.list = response.data;
-        });
+    async mounted() {
+        this.list = await api.getSites();
     },
     components: {
         SitesCreate,
@@ -43,26 +40,29 @@ export default {
     },
     methods: {
         addItem(site) {
-            this.list.push(site);
-            this.$bvToast.toast(`Site ${site.url} successfully stored on server ${site.server.ip}`, {
+            api.createSite(site);
+            this.$bvToast.toast(`Site ${site.url} successfully stored on server ${site.server.ip}`,
+            {
             title: `Successfull`,
             toaster: 'b-toaster-top-right',
             solid: true,
             appendToast: true
-            })
+            });
+            this.list.push(site);
         },
         removeSite(item) {
-            this.list = this.list.filter(i => i.server.ip !== item.server.ip);
-            this.$bvToast.toast(`Site ${item.url} successfully deleted on server ${item.server.ip}`, {
+            api.deleteSite(item._id);
+            this.$bvToast.toast(`Site ${item.url} successfully deleted on server ${item.server.ip}`,
+            {
             title: `Deleted`,
             toaster: 'b-toaster-top-right',
             variant: 'danger',
             solid: true,
             appendToast: true
-            })
-            
+            });
+            const newlist = this.list.filter(site => site._id !== item._id);
+            this.list = newlist;
         }
-        
         }
     }
 </script>
