@@ -2,7 +2,9 @@
 <div class="container">
   <div class="row d-flex justify-content-center">
     <div class="col-12 col-md-6">
-      <h1 class="text-center">Donate</h1>
+      <h1 class="text-center">
+        Donate
+      </h1>
       <donation-form
         @add-donation="addDonation">
       </donation-form>

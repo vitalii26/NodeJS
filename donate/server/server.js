@@ -1,7 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const routes = require('./routes/donate.routes');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import routes from './routes/donate.routes.js';
 
 const port = process.env.PORT || 3000;
 const app = express();

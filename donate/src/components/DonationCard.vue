@@ -30,9 +30,13 @@
       </b-card>
     </b-card-group>
 </template>
-
 <script>
 export default {
-    props: ['maxDonate', 'donationSum', 'monthDonation', 'loading']
+    props: [
+      'maxDonate',
+      'donationSum',
+      'monthDonation',
+      'loading'
+    ]
 }
 </script>
