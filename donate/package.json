@@ -4,14 +4,23 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "server": "cd server && nodemon server.js",
+    "build": "vue-cli-service build",
+    "start": "concurrently \"npm run serve\" \"npm run server\""
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.5.0",
     "chart.js": "^2.9.3",
+    "concurrently": "^5.1.0",
     "core-js": "^2.6.11",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "knex": "^0.20.10",
+    "mysql": "^2.18.1",
+    "pusher": "^3.0.0",
     "vee-validate": "^2.2.15",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
@@ -22,6 +31,7 @@
     "@vue/cli-plugin-babel": "^4.2.0",
     "@vue/cli-plugin-router": "^4.2.0",
     "@vue/cli-service": "^4.2.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "nodemon": "^2.0.2"
   }
 }
