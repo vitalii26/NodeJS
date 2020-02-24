@@ -15,7 +15,8 @@ yarn start
 yarn build
 
 ### Copy .env.example to .env
-cp .env.example .env
 ```
+cp .env.example .env
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
