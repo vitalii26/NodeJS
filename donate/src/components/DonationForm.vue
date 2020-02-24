@@ -102,7 +102,6 @@ export default {
     }
 }
 </script>
-
 <style>
     .donation__input-error {
         color: red;
