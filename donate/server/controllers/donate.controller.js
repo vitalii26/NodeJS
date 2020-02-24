@@ -10,49 +10,39 @@ const connection = mysql.createConnection({
     charset: 'utf8'
 });
 
-connection.connect(function(err){
-    if (err) {
-      return console.error("Error " + err.message);
-    }
-    else{
-      console.log("Connected to MySQL");
-    }
- });
-
 date.setMonth( date.getMonth() - 1);
 
 export const list_all_donates = (req, res) => {
     knex.select()
-    .from('fundraising')
-    .then(function(fundraising) {
-        res.send(fundraising);
-    });
-}
+        .from('fundraising')
+        .then(function(fundraising) {
+            res.send(fundraising);
+        });
+};
 
 export const max_donate = (req, res) => {
-    knex('fundraising')
-    .select('name')
-    .max('donation', {as: 'donation'})
-    .then(function(fundraising) {
-        res.send(fundraising);
+    connection.query("SELECT donation, name FROM fundraising WHERE donation =(SELECT MAX(donation) FROM fundraising)",
+    function(err, results, fields) {
+        console.log(err);
+        res.send(results);
     });
 };
 
 export const donates_sum = (req, res) => {
     knex('fundraising')
-    .sum('donation', {as: 'sum'})
-    .then(function(fundraising) {
-        res.send(fundraising);
-    });
+        .sum('donation', {as: 'sum'})
+        .then(function(fundraising) {
+            res.send(fundraising);
+        });
 };
 
 export const donates_month = (req, res) => {
     knex('fundraising')
-    .where('donated_at', '>=', date.toISOString())
-    .sum('donation', {as: 'sum'})
-    .then(function(fundraising) {
-        res.send(fundraising);
-    });
+        .where('donated_at', '>=', date.toISOString())
+        .sum('donation', {as: 'sum'})
+        .then(function(fundraising) {
+            res.send(fundraising);
+        });
 };
 
 export const create_donate = (req, res) => {
@@ -63,11 +53,11 @@ export const create_donate = (req, res) => {
         message: req.query.message,
     })
         .then(function() {
-        knex.select()
-        .from('fundraising') 
-        .then(function(fundraising) {
-            res.send(fundraising);
-        });
+            knex.select()
+                .from('fundraising') 
+                .then(function(fundraising) {
+                    res.send(fundraising);
+                });
     });
 
 };
@@ -77,5 +67,6 @@ export const chart_donates = (req, res) => {
     function(err, results, fields) {
         console.log(err);
         res.send(results);
-});
-}
+    });
+};
+

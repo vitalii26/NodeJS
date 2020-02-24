@@ -9,7 +9,6 @@ for (let i = 0; i < 50; i++) {
   });
 }
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
   return knex('fundraising').del()
     .then(function () {
       return knex('fundraising').insert([
