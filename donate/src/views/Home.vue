@@ -10,13 +10,13 @@
         :monthDonation="monthDonation"
         :loading="loading">
       </donation-card>
+      <line-chart
+        class="mb-4"
+        v-if="!loading"
+        :chartData="donationChart"/>
       <donation-list 
         :donationList="donationList">
       </donation-list>
-      <line-chart
-        class="chart"
-        v-if="!loading"
-        :chartData="donationChart"/>
     </div>
   </div>
 </template>
