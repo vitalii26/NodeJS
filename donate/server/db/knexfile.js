@@ -1,5 +1,9 @@
-require('dotenv').config({path: './.env'});
-module.exports = {
+import dotenv from 'dotenv';
+import path from 'path';
+dotenv.config({path: './.env'});
+const __dirname = path.resolve();
+
+export default {
   development: {
     client: process.env.DB_CONNECTION,
     connection: {

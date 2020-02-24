@@ -1,5 +1,5 @@
-const mysql = require('mysql');
-const knex = require('../db/knex');
+import mysql from 'mysql';
+import knex from '../db/knex.js';
 const date = new Date();
 
 const connection = mysql.createConnection({
@@ -21,7 +21,7 @@ connection.connect(function(err){
 
 date.setMonth( date.getMonth() - 1);
 
-exports.list_all_donates = (req, res) => {
+export const list_all_donates = (req, res) => {
     knex.select()
     .from('fundraising')
     .then(function(fundraising) {
@@ -29,7 +29,7 @@ exports.list_all_donates = (req, res) => {
     });
 }
 
-exports.max_donate = (req, res) => {
+export const max_donate = (req, res) => {
     knex('fundraising')
     .select('name')
     .max('donation', {as: 'donation'})
@@ -38,7 +38,7 @@ exports.max_donate = (req, res) => {
     });
 };
 
-exports.donates_sum = (req, res) => {
+export const donates_sum = (req, res) => {
     knex('fundraising')
     .sum('donation', {as: 'sum'})
     .then(function(fundraising) {
@@ -46,7 +46,7 @@ exports.donates_sum = (req, res) => {
     });
 };
 
-exports.donates_month = (req, res) => {
+export const donates_month = (req, res) => {
     knex('fundraising')
     .where('donated_at', '>=', date.toISOString())
     .sum('donation', {as: 'sum'})
@@ -55,7 +55,7 @@ exports.donates_month = (req, res) => {
     });
 };
 
-exports.create_donate = (req, res) => {
+export const create_donate = (req, res) => {
     knex('fundraising').insert({
         name: req.query.name,
         email: req.query.email,
@@ -72,7 +72,7 @@ exports.create_donate = (req, res) => {
 
 };
 
-exports.chart_donates = (req, res) => {
+export const chart_donates = (req, res) => {
     connection.query("SELECT DATE(donated_at) as date, SUM(`donation`) totalDonation FROM fundraising GROUP BY DATE(donated_at)",
     function(err, results, fields) {
         console.log(err);

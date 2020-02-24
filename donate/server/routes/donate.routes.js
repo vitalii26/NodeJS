@@ -1,20 +1,20 @@
-const donateBuilder = require('../controllers/donate.controller');
+import { list_all_donates, create_donate, max_donate, donates_sum, donates_month, chart_donates } from '../controllers/donate.controller.js';
 
-module.exports = app => {
+export default app => {
     app
         .route('/api/donates')
-        .get(donateBuilder.list_all_donates)
-        .post(donateBuilder.create_donate)
+        .get(list_all_donates)
+        .post(create_donate)
     app
         .route('/api/donates/max')
-        .get(donateBuilder.max_donate)
+        .get(max_donate)
     app
         .route('/api/donates/sum')
-        .get(donateBuilder.donates_sum)
+        .get(donates_sum)
     app
         .route('/api/donates/month')
-        .get(donateBuilder.donates_month)
+        .get(donates_month)
     app
         .route('/api/donates/chart')
-        .get(donateBuilder.chart_donates)
+        .get(chart_donates)
 };
