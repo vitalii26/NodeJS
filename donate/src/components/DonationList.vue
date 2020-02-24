@@ -1,22 +1,24 @@
 <template>
     <div class="container">
         <div class="overflow-auto">
-            <b-pagination
-            v-model="currentPage"
-            :total-rows="rows"
-            :per-page="perPage"
-            aria-controls="my-table"
-            ></b-pagination>
+            <b-table
+                id="my-table"
+                :items="donationList"
+                :per-page="perPage"
+                :current-page="currentPage"
+                small
+            >
+            </b-table>
             <p class="mt-3">
                 Current Page: {{ currentPage }}
             </p>
-            <b-table
-            id="my-table"
-            :items="donationList"
-            :per-page="perPage"
-            :current-page="currentPage"
-            small
-            ></b-table>
+            <b-pagination
+                v-model="currentPage"
+                :total-rows="rows"
+                :per-page="perPage"
+                aria-controls="my-table"
+            >
+            </b-pagination>
         </div>
     </div>
 </template>
@@ -32,7 +34,7 @@ export default {
     computed: {
         rows() {
             return this.donationList.length;
-    }
+        }
     }
 }
 </script>
